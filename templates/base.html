@@ -5,6 +5,7 @@
 			{{ field.label }}
 		</label>
 		<input id="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" {% if field.type != 'checkbox' %} class="form-control"{% endif %} {% for c in field.constraints %} {{ c }} {% endfor %}>
+		<div id="{{ field.name }}-errors"></div>
 	</div>
 {% endmacro %}
 
@@ -30,4 +31,5 @@
 			{% endblock content %}
 		</main>
 	</body>
+	<script src="/res/js/main.js"></script>
 </html>

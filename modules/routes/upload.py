@@ -1,6 +1,5 @@
 
 from routes.common import *
-from routes import app
 from auth import *
 from forms import Form, Field
 import forms.validators as validators
@@ -34,10 +33,19 @@ class UploadForm(Form):
     )
 
     def get_post(self) -> Post:
-        pass
+        
+        post = Post(
+            title = self.title.data,
+            description = self.description.data,
+            upload_ts = int(time.time()),
+            edit_ts = int(time.time())
+        )
+        
+        return post
 
 
 def string_to_tags(s: str) -> list:
+    
     res: list = []
     for tag_name in s.split():
         tag = dbsession.query(Tag).filter(Tag.name == tag_name).first()
@@ -52,10 +60,19 @@ async def upload_route():
         return redirect(url_for('login_route'))
 
     form = UploadForm()
-
-    tags = dbsession.query(Tag).filter(Tag.meta == None).all()
+    tags = dbsession.query(Tag).filter(Tag.meta == False).all()
 
     if request.method == 'GET':
-        return await render_page('upload.html', tags=tags)
+        return await render_page('upload.html', form=form, tags=tags)
     else:
-        pass 
+        if await form.load(request):
+            post = form.get_post()
+            if not post:
+                return jsonify({'errors': form.errors}), 400
+            post.uploader = g.current_account
+            dbsession.add(post)
+            dbsession.commit()
+            dbsession.refresh(post)
+            return jsonify({'post': post.id})
+        else:
+            return jsonify({'errors': form.errors}), 400 

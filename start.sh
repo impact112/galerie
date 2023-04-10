@@ -12,6 +12,10 @@ if [[ ! -d $VENV_DIR ]]; then
 	$PYTHON_EXECUTABLE -m pip install -r requirements.txt
 fi
 
+mkdir -p data/img_orig
+mkdir -p data/res/img
+mkdir -p data/res/thumb
+
 source $VENV_DIR/bin/activate
 $PYTHON_EXECUTABLE modules/main.py 
 
