@@ -2,5 +2,3 @@
 import yaml
 
 config: dict
-
-

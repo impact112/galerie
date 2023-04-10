@@ -1,19 +1,20 @@
 
 from database.common import *
 
-class Account( Base ):
+
+class Account(Base):
     __tablename__ = 'accounts'
-    id = Column( Integer, primary_key = True )
-    username = Column( String(64), unique = True )
-    profile_name = Column( String(128), unique = True )
-    description = Column( Text )
+    id = Column(Integer, primary_key=True)
+    username = Column(String(64), unique=True)
+    profile_name = Column(String(128), unique=True)
+    description = Column(Text)
 
-    auth_digest = Column( String(256) )
-    registration_ts = Column( Integer )
+    auth_digest = Column(String(256))
+    registration_ts = Column(Integer)
 
-    power_level = Column( Integer, default = 0 )
+    power_level = Column(Integer, default=0)
 
     posts = relationship(
         'Post',
-        viewonly=True 
-    ) 
+        viewonly=True
+    )
