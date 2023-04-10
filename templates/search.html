@@ -1,0 +1,11 @@
+
+{% extends "base.html" %}
+{% block content %}
+<form action="/search" method="post" enctype="multipart/form-data">
+    <input type="text" id="query" name="query"><br>
+    <input type="submit"><br>
+</form>
+{% for tag in tags %}
+	<button onClick="add_text_to_field("query", "{{ tag.name }}")">{{ tag.name }}</button>
+{% endfor %}
+{% endblock content %}

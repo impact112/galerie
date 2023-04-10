@@ -1,0 +1,11 @@
+
+# This is an example config file
+
+media_store:
+  internal: True
+  external_path: "file://"
+
+database:
+  type: sqlite
+  db_file: data/galerie.db
+

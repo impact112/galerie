@@ -1,0 +1,38 @@
+
+{% extends "base.html" %}
+{% block content %}
+	<h1>Accounts</h1>
+	<table class="w3-table w3-striped w3-border">
+		<tr>
+			<th>id</th>
+			<th>username</th>
+			<th>display name</th>
+			<th>post count</th>
+			<th>power level</th>
+		</tr>
+		{% for account in accounts %}
+		<tr>
+			<th>{{ account.id }}</th>
+			<th>{{ account.username }}</th>
+			<th>{{ account.profile_name }}</th>
+			<th>{{ '0' if account.posts == None else account.posts | length }}</th>
+			<th>{{ account.power_level }}</th>
+		</tr>
+		{% endfor %}
+	</table>
+	<h1>Tags</h1>
+	<table class="w3-table w3-striped w3-border">
+		<tr>
+			<th>id</th>
+			<th>name</th>
+			<th>children</th>
+		</tr>
+		{% for tag in tags %}
+		<tr>
+			<th>{{ tag.id }}</th>
+			<th>{{ tag.name }}</th>
+			<th> - </th>
+		</tr>
+		{% endfor %}
+	</table>
+{% endblock content %}

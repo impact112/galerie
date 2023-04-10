@@ -1,0 +1,29 @@
+
+{% extends "base.html" %}
+{% block title %}{{ post.title }}{% endblock title %}
+{% block content %}
+
+	<h1>{{ post.title }}</h1>
+	
+	{% for mediaitem in post.mediaitems %}
+		<img style="width: 100%" class="mx-auto d-block" src="{{ mediaitem.server_path }}">
+		<p>{{ mediaitem.local_path | string }}</p>
+	{% endfor %}
+	
+	<p>{{ post.description }}</p>
+	
+	<p>Tags:</p>
+	{% for tag in post.tags %}
+		<button title="{{ tag.name }} - {{ tag.description }}">{{ tag.name }}</button>
+	{% endfor %}
+	
+	<p>Uploaded on: {{ post.upload_ts }}
+	
+	{% if post.upload_ts != post.edit_ts %}
+		Edited on: {{ post.edit_ts }}
+	{% endif %}
+	</p>
+
+	<p>Uploaded by: {{ post.uploader.username }}</p>
+
+{% endblock content %}

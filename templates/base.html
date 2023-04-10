@@ -1,0 +1,33 @@
+
+{% macro render_field( field ) %}
+	<div class="mb-3">
+		<label for="{{ field.name }}">
+			{{ field.label }}
+		</label>
+		<input id="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" {% if field.type != 'checkbox' %} class="form-control"{% endif %} {% for c in field.constraints %} {{ c }} {% endfor %}>
+	</div>
+{% endmacro %}
+
+{% macro render_form( form ) %}
+	{% for field in form.fields %}
+		{{ render_field( field ) }}
+	{% endfor %}
+	<input type="submit" class="btn btn-primary" value="{{ form.submit_text }}">
+{% endmacro %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<title>{% block title %}{% endblock title %}</title>
+	</head>
+	<body>
+		{% include 'navbar.html' %}
+		<main class="container mt-5">
+			{% block content %}
+			{% endblock content %}
+		</main>
+	</body>
+</html>

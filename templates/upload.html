@@ -1,0 +1,7 @@
+
+{% extends "base.html" %}
+{% block content %}
+<form id="upload_form" action="/upload" method="post" enctype="multipart/form-data">
+		{{ render_form( form ) }}
+</form>
+{% endblock content %}
