@@ -49,9 +49,9 @@ class Form():
 
     submit_text: str = 'submit'
 
-    async def load(self, request: dict):
+    async def load(self, request):
         valid: bool = True
-        data: dict = await request.form
+        data: dict = await request.form if request.method == 'POST' else request.args
         files: dict = await request.files
 
         for field_name, field in vars(self.__class__).items():

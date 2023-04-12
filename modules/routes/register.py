@@ -55,7 +55,7 @@ class RegisterForm(Form):
             profile_name=self.profile_name.data,
             auth_digest=ag2.hash(self.password.data),
             registration_ts=int(time.time()),
-            power_level = 1 if dbsession.query(Account).all() else 99
+            power_level=1 if dbsession.query(Account).all() else 99
         )
 
         return account

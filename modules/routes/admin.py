@@ -1,38 +1,38 @@
 
 from routes.common import *
-from routes import app
-from auth import *
+from database import *
+from forms import Form, Field
+import forms.validators as validators
 
 
-@app.route('/admin')
-async def admin_index_route():
-    if not g.current_account:
-        return 'You must be logged in'
+class AddTagForm(Form):
 
-    if g.current_account.power_level != 99:
-        return 'You must be admin'
+    tag_name = Field(
+        name='tag_name',
+        label='Name',
+        validators=[validators.NotEmpty()]
+    )
 
-    accounts = dbsession.query(Account).all()
-    tags = dbsession.query(Tag).all()
-
-    return await render_page(
-        'admin_index.html',
-        accounts=accounts,
-        tags=tags
+    tag_description = Field(
+        name='tag_description',
+        label='Description',
+        validators=[validators.NotEmpty()]
     )
 
 
-@app.route('/admin/deluser')
-async def delete_user_route():
-    return 'a'
+async def admin_route():
+
+    if g.current_account.power_level < 99:
+        return 'Not an admin'
+
+    accounts = dbsession.query(Account).all()
+    tags = dbsession.query(Tag).all()
+    return await render_page('admin.html', tags=tags, accounts=accounts)
 
 
-@app.route('/admin/addtag', methods=['POST'])
-async def add_tag_route():
-    current_account: Account = get_account_from_session()
-    if not account:
-        return 'You must be logged in'
-        if not current_account.power_level != 99:
-            return 'You must be admin'
+async def add_tag():
+    pass
 
-    return 'Not implemented'
+
+async def remove_tag():
+    pass

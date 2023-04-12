@@ -12,7 +12,3 @@ Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
 dbsession = Session()
-
-
-def get_posts_by_tags(tags: list, neg_tags: list) -> list:
-    return dbsession.query(Post).join(Post.tags).filter(Tag.name.in_(tags)).filter(~Tag.name.in_(neg_tags) if neg_tags else True).group_by(Post.id).having(func.count(Tag.id) == len(tags)).all()

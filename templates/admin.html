@@ -1,0 +1,56 @@
+
+{% extends "base.html" %}
+{% block content %}
+	<h1>Accounts</h1>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th scope="col">id</th>
+				<th scope="col">username</th>
+				<th scope="col">display name</th>
+				<th scope="col">post count</th>
+				<th scope="col">power level</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for account in accounts %}
+				<tr>
+					<th>{{ account.id }}</th>
+					<th>{{ account.username }}</th>
+					<th>{{ account.profile_name }}</th>
+					<th>{{ '0' if account.posts == None else account.posts | length }}</th>
+					<th>{{ account.power_level }}</th>
+					<th><a href="/delaccount/{{ account.id }}">delete</a></th>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<h1>Tags</h1>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th scope="col">id</th>
+				<th scope="col">name</th>
+				<th scope="col">description</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for tag in tags %}
+				<tr>
+					<th>{{ tag.id }}</th>
+					<th>{{ tag.name }}</th>
+					<th>{{ tag.description }}</th>
+					<th><a href="/deltag/{{ account.id }}">delete</a></th>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<th><b>+</b></th>
+			<th><input type="text"></th>
+			<th><input type="text"></th>
+			<th><input type="submit" value="Add tag"></th>
+		</tfoot>
+	</table>
+{% endblock content %}

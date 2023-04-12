@@ -33,19 +33,26 @@ class UploadForm(Form):
     )
 
     def get_post(self) -> Post:
-        
+
+        tags = string_to_tags(self.tags.data)
+        if not tags:
+            self.tags.errors.append('Invalid tags')
+            return None
+
         post = Post(
-            title = self.title.data,
-            description = self.description.data,
-            upload_ts = int(time.time()),
-            edit_ts = int(time.time())
+            title=self.title.data,
+            description=self.description.data,
+            upload_ts=int(time.time()),
+            edit_ts=int(time.time())
         )
-        
+
+        post.tags = tags
+
         return post
 
 
 def string_to_tags(s: str) -> list:
-    
+
     res: list = []
     for tag_name in s.split():
         tag = dbsession.query(Tag).filter(Tag.name == tag_name).first()
@@ -75,4 +82,4 @@ async def upload_route():
             dbsession.refresh(post)
             return jsonify({'post': post.id})
         else:
-            return jsonify({'errors': form.errors}), 400 
+            return jsonify({'errors': form.errors}), 400
