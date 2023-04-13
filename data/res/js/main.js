@@ -14,7 +14,7 @@ function handleFormSubmit(formId, successFunction) {
             const errorMessages = Object.entries(data.errors);
             errorMessages.forEach(([field, message]) => {
               const errorElement = document.querySelector(`#${field}-errors`);
-              errorElement.innerHTML += `<div class="alert alert-danger">${message}</div>`;
+              errorElement.innerHTML = `<div class="alert alert-danger">${message}</div>`;
             });
           });
         } else if (response.status == 200) {
@@ -26,7 +26,12 @@ function handleFormSubmit(formId, successFunction) {
 }
 
 handleFormSubmit('login_form', function (data) {
-  window.location = '/';
+  const params = new URLSearchParams(window.location.search);
+	const redirect = params.get('redirect');
+	if(redirect)
+		window.location = redirect;
+	else
+		window.location = '/';
 });
 
 handleFormSubmit('register_form', function (data) {

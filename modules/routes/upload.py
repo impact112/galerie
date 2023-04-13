@@ -61,10 +61,8 @@ def string_to_tags(s: str) -> list:
     return res
 
 
+@enforce_login
 async def upload_route():
-
-    if not g.current_account:
-        return redirect(url_for('login_route'))
 
     form = UploadForm()
     tags = dbsession.query(Tag).filter(Tag.meta == False).all()

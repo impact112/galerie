@@ -49,7 +49,7 @@ class LoginForm(Form):
 async def login_route():
 
     if g.current_account:
-        return 'Already logged in'
+        return redirect(url_for('index_route'))
 
     form = LoginForm()
 
