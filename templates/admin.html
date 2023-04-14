@@ -21,7 +21,7 @@
 					<th>{{ account.profile_name }}</th>
 					<th>{{ '0' if account.posts == None else account.posts | length }}</th>
 					<th>{{ account.power_level }}</th>
-					<th><a href="/delaccount/{{ account.id }}">delete</a></th>
+					<th><a class="btn btn-danger" href="/delaccount/{{ account.id }}">delete</a></th>
 				</tr>
 			{% endfor %}
 		</tbody>
@@ -42,15 +42,16 @@
 					<th>{{ tag.id }}</th>
 					<th>{{ tag.name }}</th>
 					<th>{{ tag.description }}</th>
-					<th><a href="/deltag/{{ tag.id }}">delete</a></th>
+					<th><a class="btn btn-danger" href="/deltag/{{ tag.id }}">delete</a></th>
 				</tr>
 			{% endfor %}
 		</tbody>
 		<tfoot>
 			<th><b>+</b></th>
-			<th><input type="text"></th>
-			<th><input type="text"></th>
-			<th><input type="submit" value="Add tag"></th>
+			<th><input form="addtag_form" id="tag_name" name="tag_name" class="form-control" type="text"></th>
+			<th><input form="addtag_form" id="tag_description" name="tag_description" class="form-control" type="text"></th>
+			<th><input form="addtag_form" class="btn btn-primary" type="submit" value="Add tag"></th>
 		</tfoot>
 	</table>
+	<form id="addtag_form" method="post" action="/addtag"></form>
 {% endblock content %}

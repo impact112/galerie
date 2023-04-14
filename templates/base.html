@@ -1,19 +1,19 @@
 
-{% macro render_field( field ) %}
+{% macro render_field( field, form_name ) %}
 	<div class="mb-3">
 		<label for="{{ field.name }}">
 			{{ field.label }}
 		</label>
-		<input id="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" {% if field.type != 'checkbox' %} class="form-control"{% endif %} {% for c in field.constraints %} {{ c }} {% endfor %}>
+		<input form="{{ form_name }}" id="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" {% if field.type != 'checkbox' %} class="form-control"{% endif %} {% for c in field.constraints %} {{ c }} {% endfor %}>
 		<div id="{{ field.name }}-errors"></div>
 	</div>
 {% endmacro %}
 
 {% macro render_form( form ) %}
 	{% for field in form.fields %}
-		{{ render_field( field ) }}
+		{{ render_field( field, form.id ) }}
 	{% endfor %}
-	<input type="submit" class="btn btn-primary" value="{{ form.submit_text }}">
+	<input form="{{ form.id }}" type="submit" class="btn btn-primary" value="{{ form.submit_text }}">
 {% endmacro %}
 
 <!DOCTYPE html>

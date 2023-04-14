@@ -2,7 +2,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<form id="register_form" action="/register" method="post">
-		{{ render_form( form ) }}
-	</form>
+	<form id="register_form" action="/register" method="post"></form>
+	{{ render_form( form ) }}
 {% endblock content %}

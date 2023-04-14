@@ -7,6 +7,8 @@ import forms.validators as validators
 
 class UploadForm(Form):
 
+    id = 'upload_form'
+
     title = Field(
         name='title',
         label='Post title:',
@@ -27,13 +29,14 @@ class UploadForm(Form):
 
     file = Field(
         name='file',
-        label='Image file:',
+        label='Media file:',
         type='file',
         validators=[validators.NotEmpty()]
     )
 
-    def get_post(self) -> Post:
+    submit_text = 'Upload'
 
+    def get_post(self) -> Post:
         tags = string_to_tags(self.tags.data)
         if not tags:
             self.tags.errors.append('Invalid tags')

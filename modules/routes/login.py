@@ -6,6 +6,8 @@ import forms.validators as validators
 
 class LoginForm(Form):
 
+    id = 'login_form'
+
     username = Field(
         name='username',
         label='Username:',
