@@ -42,8 +42,14 @@ class NotEmpty(Validator):
         return 'required'
 
 
-class FileExtension(Validator):
+class HasExtension(Validator):
 
     def __init__(self, **kwargs):
-        self.message = kwargs.get('message', 'Extension not allowed.')
         self.extensions = kwargs.get('extensions')
+        self.message = kwargs.get('message', 'Extension not allowed.')
+
+    def validate(self, field: Field):
+        if not field.data:
+            return True
+        filename = field.data.filename.lower()
+        return '.' in filename and filename.rsplit('.', 1)[1] in self.extensions

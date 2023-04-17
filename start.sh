@@ -15,6 +15,8 @@ fi
 mkdir -p data/img_orig
 mkdir -p data/res/img
 mkdir -p data/res/thumb
+cp -r src/js data/res/
+cp -r src/css data/res/
 
 source $VENV_DIR/bin/activate
 $PYTHON_EXECUTABLE modules/main.py 

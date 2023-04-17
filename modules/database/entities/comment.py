@@ -9,9 +9,12 @@ class Comment(Base):
     parent_id = Column(Integer, ForeignKey('comments.id'))
     uploader_id = Column(Integer, ForeignKey('accounts.id'))
 
-    title = Column(String(128))
     content = Column(Text)
 
     upload_ts = Column(Integer)
     edit_ts = Column(Integer)
     visibility = Column(Integer)
+
+    replies = relationship(
+        'Comment'
+    )

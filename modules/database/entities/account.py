@@ -18,3 +18,7 @@ class Account(Base):
         'Post',
         viewonly=True
     )
+
+    replies = relationship(
+        'Comment'
+    )

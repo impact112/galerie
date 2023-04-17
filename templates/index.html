@@ -2,8 +2,17 @@
 {% extends "base.html" %}
 {% block content %}
 	<h1>Index</h1>
-{% for post in posts %}
-	<a href="{{ url_for( 'post_route', post_id = post.id ) }}">{{ post.title }}</a>
-	<br>
-{% endfor %}
+	<div class="grid-view">
+		{% for post in posts %}
+			<div>
+			<a href="{{ url_for( 'post_route', post_id = post.id ) }}">{{ post.title }}
+				{% for mediaitem in post.mediaitems %}
+    			{% if mediaitem.mediatype == 'thumb' %}
+      			<img style="width: 100%" class="mx-auto d-block" src="{{ mediaitem.server_path }}">
+    			{% endif %}
+  			{% endfor %}
+			</a>
+			</div>
+		{% endfor %}
+	</div>
 {% endblock content %}

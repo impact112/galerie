@@ -4,7 +4,7 @@
 		<label for="{{ field.name }}">
 			{{ field.label }}
 		</label>
-		<input form="{{ form_name }}" id="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" {% if field.type != 'checkbox' %} class="form-control"{% endif %} {% for c in field.constraints %} {{ c }} {% endfor %}>
+		<input form="{{ form_name }}" id="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" {% if field.type != 'checkbox' %} class="form-control"{% endif %} {% for c in field.attributes %} {{ c }} {% endfor %}>
 		<div id="{{ field.name }}-errors"></div>
 	</div>
 {% endmacro %}
@@ -22,6 +22,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/res/css/main.css">
 		<title>{% block title %}{% endblock title %}</title>
 	</head>
 	<body>

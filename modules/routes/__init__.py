@@ -9,6 +9,7 @@ from routes.post import post_route
 from routes.upload import upload_route
 from routes.search import search_route
 from routes.admin import admin_route, addtag_route
+from routes.addcomment import addcomment_route
 
 from routes.common import *
 
@@ -29,6 +30,7 @@ app.add_url_rule('/upload', 'upload_route', upload_route, methods=['GET', 'POST'
 app.add_url_rule('/search', 'search_route', search_route)
 app.add_url_rule('/admin', 'admin_route', admin_route)
 app.add_url_rule('/addtag', 'addtag_route', addtag_route, methods=['POST'])
+app.add_url_rule('/addcomment/<int:post_id>', 'addcomment_route', addcomment_route, methods=['POST'])
 
 
 @app.before_request

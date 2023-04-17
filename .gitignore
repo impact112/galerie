@@ -2,6 +2,4 @@ data/galerie.db
 venv
 *.swp
 **/__pycache__/
-data/img_orig/
-data/res/img/
-data/res/thumb/
+data/*

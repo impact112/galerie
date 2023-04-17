@@ -3,6 +3,8 @@ from routes.common import *
 from auth import *
 from forms import Form, Field
 import forms.validators as validators
+from PIL import Image
+import secrets
 
 
 class UploadForm(Form):
@@ -31,7 +33,7 @@ class UploadForm(Form):
         name='file',
         label='Media file:',
         type='file',
-        validators=[validators.NotEmpty()]
+        validators=[validators.NotEmpty(), validators.HasExtension(extensions=['png', 'jpg', 'jpeg', 'gif'])]
     )
 
     submit_text = 'Upload'
@@ -39,7 +41,7 @@ class UploadForm(Form):
     def get_post(self) -> Post:
         tags = string_to_tags(self.tags.data)
         if not tags:
-            self.tags.errors.append('Invalid tags')
+            self.tags.errors.append('Invalid tags.')
             return None
 
         post = Post(
@@ -50,6 +52,29 @@ class UploadForm(Form):
         )
 
         post.tags = tags
+
+        try:
+            with Image.open(self.file.data.stream) as img:
+
+                img_token = secrets.token_urlsafe(10)
+                media_img = MediaItem(
+                    filename=f'{img_token}_{self.title.data}.jpg',
+                    mediatype='image'
+                )
+
+                media_thumb = MediaItem(
+                    filename=f'{img_token}_{self.title.data}.jpg',
+                    mediatype='thumb'
+                )
+
+                img.save(f'data/img_orig/{img_token}_{self.file.data.filename}')
+                img.save(media_img.local_path)
+                img.thumbnail((200, 200))
+                img.save(media_thumb.local_path)
+                post.mediaitems = [media_img, media_thumb]
+        except Exception as e:
+            self.file.errors.append(f'Error loading image. {e}')
+            return None
 
         return post
 

@@ -3,6 +3,7 @@ import time
 from pathlib import Path
 from functools import wraps
 from quart import Quart, g, render_template, session, redirect, url_for, request, flash, jsonify
+import config
 
 
 def enforce_login(f):

@@ -36,3 +36,7 @@ class Post(Base):
     uploader = relationship(
         'Account'
     )
+
+    replies = relationship(
+        'Comment'
+    )

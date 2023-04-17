@@ -3,7 +3,8 @@
 
 media_store:
   internal: True
-  external_path: "file://"
+  web_path: "/res"
+  local_path: 
 
 database:
   type: sqlite

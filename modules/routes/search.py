@@ -6,7 +6,7 @@ from forms import Form, Field, validators
 
 def get_posts_by_tags(tags: list, neg_tags: list = []):
 
-    q = db.session.query(Post).join(Post.tags)
+    q = dbsession.query(Post).join(Post.tags)
 
     if tags:
         q = q.filter(Tag.id.in_([tag.id for tag in tags]))
@@ -22,18 +22,23 @@ def get_posts_by_tags(tags: list, neg_tags: list = []):
 class SearchForm(Form):
 
     tag_list = Field(
-        name='tags',
+        name='tag_list',
         placeholders='Search for multiple tags',
-        validators=[validators.NotEmpty()]
     )
 
-    def get_posts():
-        pass
+    def get_posts(self):
+        tags: list = []
+        neg_tags: list = []
+        for tag_name in self.tag_list.data.split():
+            tag = dbsession.query(Tag).filter(Tag.name == tag_name).first()
+            tags.append(tag)
+        return get_posts_by_tags(tags, neg_tags)
 
 
 async def search_route():
     form = SearchForm()
     if await form.load(request):
-        return jsonify(form.data)
+        posts = form.get_posts()
+        return await render_page('index.html', posts=posts)
     else:
         return jsonify({'errors': form.errors})
