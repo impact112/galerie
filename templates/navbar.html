@@ -1,30 +1,22 @@
 
-<nav class="navbar navbar-expand-sm bg-dark">
-	<div class="container-fluid">
+<nav class="navbar">
 
-  	<div class="navbar-nav me-auto">
-			<a href="/" class="nav-link text-white">Index</a>
+  	<div class="nav-left">
+			<a class="clickable" href="/">Index</a>
 			{% if current_account %}
-				<a class="btn btn-primary" href='/upload'><i class="fa fa-plus"></i>upload</a>	
+				<a class="clickable" href='/upload'>upload</a>	
 			{% endif %}
 		</div>
 
-  	<div class="navbar-nav mx-auto">
-			<form class="d-flex" action="/search" method="get">
-  			<input id="tag_list" name="tag_list" type="text" class="form-control me-2" placeholder="Search..">
- 				<input type="submit" class="btn btn-secondary" value="Search">
+  	<div class="nav-middle">
+			<form action="/search" class="container" method="get">
+  			<input id="tag_list" name="tag_list" type="text" class="form-item" placeholder="Search..">
+ 				<input type="submit" class="btn btn-main" value="Search">
 			</form>
 		</div>
 		
-  	<div class="navbar-nav ms-auto">
-			{% if current_account %}
-				<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ current_account.profile_name }}</button>
-				<ul class="dropdown-menu dropdown-menu-end">
-					<li><a href="/logout" class="dropdown-item btn btn-danger">Log Out</a></ul>
-			{% else %}
-				<a class="btn btn-primary" href="/login">Log in</a>
-			{% endif %}
-			</ul>
+  	<div class="nav-right">	
+				<a class="clickable" href="/login">Log in</a>
 		</div>
 	</div>
 </nav>

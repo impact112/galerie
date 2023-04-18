@@ -1,33 +1,31 @@
 
 {% macro render_field( field, form_name ) %}
-	<div class="mb-3">
+	<div>
 		<label for="{{ field.name }}">
 			{{ field.label }}
 		</label>
-		<input form="{{ form_name }}" id="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" {% if field.type != 'checkbox' %} class="form-control"{% endif %} {% for c in field.attributes %} {{ c }} {% endfor %}>
+		<input form="{{ form_name }}" id="{{ field.name }}" type="{{ field.type }}" name="{{ field.name }}" {% if field.type != 'checkbox' %}class="form-item"{% else %}class="form-checkbox"{% endif %} {% for c in field.attributes %} {{ c }} {% endfor %}>
 		<div id="{{ field.name }}-errors"></div>
 	</div>
 {% endmacro %}
 
 {% macro render_form( form ) %}
 	{% for field in form.fields %}
-		{{ render_field( field, form.id ) }}
+		{{ render_field( field, form.id ) }}	
 	{% endfor %}
-	<input form="{{ form.id }}" type="submit" class="btn btn-primary" value="{{ form.submit_text }}">
+	<input form="{{ form.id }}" type="submit" class="clickable btn btn-main" value="{{ form.submit_text }}">
 {% endmacro %}
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 		<link rel="stylesheet" href="/res/css/main.css">
 		<title>{% block title %}{% endblock title %}</title>
 	</head>
 	<body>
 		{% include 'navbar.html' %}
-		<main class="container mt-5">
+		<main>
 			{% block content %}
 			{% endblock content %}
 		</main>

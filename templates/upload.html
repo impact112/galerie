@@ -7,8 +7,8 @@
 	{{ render_field( form.description, form.id ) }}
 	{{ render_field( form.tags, form.id ) }}
 	{% for tag in tags %}
-		<button class="btn btn-primary" onclick="addText('tags', '{{ tag.name }}')">{{ tag.name }}</button>
+		<button class="btn btn-main" onclick="addText('tags', '{{ tag.name }}')">{{ tag.name }}</button>
 	{% endfor %}
 	{{ render_field( form.file, form.id ) }}
-	<input form="{{ form.id }}" type="submit" class="btn btn-primary" value="{{ form.submit_text }}">
+	<input form="{{ form.id }}" type="submit" class="btn btn-main" value="{{ form.submit_text }}">
 {% endblock content %}

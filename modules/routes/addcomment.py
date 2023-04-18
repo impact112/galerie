@@ -39,8 +39,10 @@ async def addcomment_route(post_id: int):
 
         if parent_comment:
             parent_comment.replies.append(comment)
-
-        post.replies.append(comment)
+        else:
+            post.replies.append(comment)
+        
+        comment.uploader = g.current_account
 
         dbsession.commit()
         dbsession.refresh(comment)

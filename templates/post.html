@@ -8,7 +8,6 @@
 	{% for mediaitem in post.mediaitems %}
 		{% if mediaitem.mediatype == 'image' %}
 			<img style="width: 100%" class="mx-auto d-block" src="{{ mediaitem.server_path }}">
-			<p>{{ mediaitem.local_path | string }}</p>
 		{% endif %}
 	{% endfor %}
 	
@@ -28,11 +27,9 @@
 	</p>
 
 	<p>Uploaded by: {{ post.uploader.username }}</p>
-
-	{% for reply in post.replies %}
-		<p>{{ reply.content }}</p>
-	{% endfor %}
-
+	
+	{% include 'replies.html' %}
+	
 	{% if current_account %}
 		{% include 'commentform.html' %}
 	{% else %}

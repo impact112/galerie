@@ -18,3 +18,7 @@ class Comment(Base):
     replies = relationship(
         'Comment'
     )
+
+    uploader = relationship(
+        'Account'
+    )

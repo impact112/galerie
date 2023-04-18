@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 {% block content %}
 	<h1>Accounts</h1>
-	<table class="table table-bordered">
+	<table class="table table-border">
 		<thead>
 			<tr>
 				<th scope="row">id</th>
@@ -23,14 +23,14 @@
 				</tr>
 				<tr>
 					<td colspan=5>
-						<a class="btn btn-danger" href="/delaccount/{{ account.id }}">delete</a>
+						<a class="clickable btn btn-red" href="/delaccount/{{ account.id }}">delete</a>
 					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 	<h1>Tags</h1>
-	<table class="table table-bordered">
+	<table class="table table-border">
 		<thead>
 			<tr>
 				<th scope="col">id</th>
@@ -47,15 +47,17 @@
 				</tr>
 				<tr>
 					<td colspan=3>
-						<a class="btn btn-danger" href="/deltag/{{ tag.id }}">delete</a></td>
+						<a class="clickable btn btn-red" href="/deltag/{{ tag.id }}">delete</a></td>
 					</td>	
 				</tr>
 			{% endfor %}
 		</tbody>
 		<tfoot>
-			<td><input form="addtag_form" class="btn btn-primary" type="submit" value="+"></td>
-			<td><input form="addtag_form" id="tag_name" name="tag_name" class="form-control" type="text" placeholder="Tag name"></td>
-			<td><input form="addtag_form" id="tag_description" name="tag_description" class="form-control" type="text" placeholder="Tag description"></td>
+			<td colspan=3>
+			<input form="addtag_form" id="tag_name" name="tag_name" class="form-item" type="text" placeholder="Tag name">
+			<input form="addtag_form" id="tag_description" name="tag_description" class="form-item" type="text" placeholder="Tag description">
+			<input form="addtag_form" class="btn btn-main" type="submit" value="Add tag">
+			</td>
 		</tfoot>
 	</table>
 	<form id="addtag_form" method="post" action="/addtag"></form>

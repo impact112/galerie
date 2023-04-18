@@ -1,0 +1,25 @@
+
+{% macro render_reply( reply ) %}
+	<div>
+		{% if reply.post_id %}
+			<p>#{{ reply.id }}
+			{{ reply.uploader.profile_name }} comments:</p>
+		{% else %}
+			{{ reply.uploader.profile_name }} replies to #{{ reply.parent_id }}:</p>
+		{% endif %}
+		<p>{{ reply.content }}</p>
+		{% for reply in reply.replies %}
+			{{ render_reply( reply ) }}
+		{% endfor %}
+	</div>
+{% endmacro %}
+
+{% macro render_replies() %}
+
+	{% for reply in post.replies %}
+			{{ render_reply(reply) }}
+	{% endfor %}
+
+{% endmacro %}
+
+{{ render_replies() }}
