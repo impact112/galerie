@@ -54,32 +54,33 @@ handleFormSubmit("addtag_form", function (data) {
 });
 
 handleFormSubmit("addcomment_form", function (data) {
-	window.location.reload();
+  window.location.reload();
 });
 
-const spans = document.querySelectorAll('span[data-timestamp]');
+const spans = document.querySelectorAll("span[data-timestamp]");
 
-spans.forEach(span => {
-  span.classList.add('timestamp');
+spans.forEach((span) => {
+  span.classList.add("timestamp");
   const options = {
-		year: 'numeric',
-  	month: 'long',
- 		day: 'numeric',
-  	hour: 'numeric',
-  	minute: 'numeric',
-  	hour12: true,
-  	timeZoneName: 'short'
-	};
-	const timestamp = parseInt(span.getAttribute('data-timestamp'), 10);
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+    timeZoneName: "short",
+  };
+  const timestamp = parseInt(span.getAttribute("data-timestamp"), 10);
   const date = new Date(timestamp * 1000);
-  var formattedDate = date.toLocaleString('en-US', options);
-	formattedDate = formattedDate.replace(`${date.getDate()},`, `${date.getDate()}`);
+  var formattedDate = date.toLocaleString("en-US", options);
+  formattedDate = formattedDate.replace(
+    `${date.getDate()},`,
+    `${date.getDate()}`
+  );
   span.textContent = formattedDate;
 });
 
 function addText(fieldId, fieldText) {
   var inputField = document.getElementById(fieldId);
-	inputField.value += fieldText + ' ';
+  inputField.value += fieldText + " ";
 }
-
-

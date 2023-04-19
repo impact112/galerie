@@ -6,22 +6,27 @@ import forms.validators as validators
 
 class RegisterForm(Form):
 
+    id = 'register_form'
+
     username = Field(
         name='username',
         label='Username:',
         validators=[validators.NotEmpty()]
     )
+    
     profile_name = Field(
         name='profile_name',
         label='Profile name:',
         validators=[]
     )
+    
     password = Field(
         name='password',
         label='Password:',
         type='password',
         validators=[validators.NotEmpty()]
     )
+    
     password_confirm = Field(
         name='password_confirm',
         label='Password confirmation:',
