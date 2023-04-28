@@ -11,4 +11,7 @@ class SessionToken(Base):
     token = Column(String(64), unique=True)
     max_age = Column(Integer)
 
-    account = relationship(Account)
+    account = relationship(
+        'Account',
+        uselist=False
+    )

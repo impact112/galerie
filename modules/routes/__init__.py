@@ -10,6 +10,7 @@ from routes.upload import upload_route
 from routes.search import search_route
 from routes.admin import admin_route, addtag_route
 from routes.addcomment import addcomment_route
+from routes.profile import profile_route
 
 from routes.common import *
 
@@ -25,6 +26,7 @@ app.add_url_rule('/', 'index_route', index_route)
 app.add_url_rule('/login', 'login_route', login_route, methods=['GET', 'POST'])
 app.add_url_rule('/register', 'register_route', register_route, methods=['GET', 'POST'])
 app.add_url_rule('/logout', 'logout_route', logout_route)
+app.add_url_rule('/profile/<string:username>', 'profile_route', profile_route)
 app.add_url_rule('/post/<int:post_id>', 'post_route', post_route)
 app.add_url_rule('/upload', 'upload_route', upload_route, methods=['GET', 'POST'])
 app.add_url_rule('/search', 'search_route', search_route)

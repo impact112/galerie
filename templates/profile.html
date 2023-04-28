@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+{% block title %}{{ account.profile_name }}{% endblock title %}
+{% block content %}
+
+<h1>{{ account.profile_name }}</h1>
+<h2>@{{ account.username }}</h2>
+
+<div class="grid-view">
+	{% for post in account.posts %}
+		<div>
+			<a href="{{ url_for( 'post_route', post_id = post.id ) }}">{{ post.title }}
+				{% for mediaitem in post.mediaitems %}
+					{% if mediaitem.mediatype == 'thumb' %}
+						<img style="width: 100%" class="mx-auto d-block" src="{{ mediaitem.server_path }}">
+					{% endif %}
+				{% endfor %}
+			</a>
+		</div>
+	{% endfor %}
+</div>
+
+{% endblock content %}

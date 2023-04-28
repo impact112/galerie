@@ -1,7 +1,5 @@
 
 from database.common import *
-from database.entities.tag_relationship import tag_relationships
-from database.entities.account import Account
 
 
 class Post(Base):
@@ -19,24 +17,33 @@ class Post(Base):
     visibility = Column(Integer)
     # 0 = public, 1 = unlisted, 2 = requires_login, 3 = hidden
 
+    parent_post = relationship(
+        'Post',
+        remote_side=[id],
+        back_populates='child_posts'
+    )
+
     child_posts = relationship(
-        'Post'
+        'Post',
+        back_populates='parent_post'
     )
 
     tags = relationship(
         'Tag',
-        secondary=tag_relationships,
+        secondary='tag_relationships',
         back_populates='posts'
     )
 
     mediaitems = relationship(
-        'MediaItem'
+        'MediaItem',
     )
 
     uploader = relationship(
-        'Account'
+        'Account',
+        uselist=False
     )
 
     replies = relationship(
-        'Comment'
+        'Comment',
+        cascade='all, delete'
     )

@@ -12,10 +12,12 @@
 	{% endfor %}
 	
 	<p>{{ post.description }}</p>
+
+	<p>{{ post.views }}	views</p>
 	
 	<p>Tags:
 		{% for tag in post.tags %}
-			<button class="btn btn-primary" title="{{ tag.name }} - {{ tag.description }}">{{ tag.name }}</button>
+			<button class="btn btn-main" title="{{ tag.name }} - {{ tag.description }}">{{ tag.name }}</button>
 		{% endfor %}
 	</p>	
 
@@ -26,7 +28,7 @@
 	{% endif %}
 	</p>
 
-	<p>Uploaded by: {{ post.uploader.username }}</p>
+	<p>Uploaded by: <a class="clickable" href="/profile/{{ post.uploader.username }}">{{ post.uploader.profile_name }}</a></p>
 	
 	{% include 'replies.html' %}
 	

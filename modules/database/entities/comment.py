@@ -20,5 +20,6 @@ class Comment(Base):
     )
 
     uploader = relationship(
-        'Account'
+        'Account',
+        uselist=False
     )

@@ -4,7 +4,7 @@
   	<div class="nav-left">
 			<a class="clickable" href="/">Index</a>
 			{% if current_account %}
-				<a class="clickable" href='/upload'>upload</a>	
+				<a class="btn btn-main clickable" href='/upload'>upload</a>	
 			{% endif %}
 		</div>
 
@@ -15,8 +15,12 @@
 			</form>
 		</div>
 		
-  	<div class="nav-right">	
-				<a class="clickable" href="/login">Log in</a>
+  	<div class="nav-right">
+				{% if current_account %}	
+					<a class="clickable" href="/profile/{{ current_account.username }}">{{ current_account.profile_name }}</a>
+				{% else %}
+					<a class="clickable" href="/login">Log in</a>
+				{% endif %}
 		</div>
 	</div>
 </nav>

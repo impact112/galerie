@@ -15,10 +15,13 @@ class Account(Base):
     power_level = Column(Integer, default=0)
 
     posts = relationship(
-        'Post',
-        viewonly=True
+        'Post'
     )
 
     replies = relationship(
         'Comment'
+    )
+
+    session_tokens = relationship(
+        'SessionToken'
     )
