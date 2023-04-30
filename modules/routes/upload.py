@@ -57,6 +57,7 @@ class UploadForm(Form):
             with Image.open(self.file.data.stream) as img:
 
                 img_token = secrets.token_urlsafe(10)
+
                 media_img = MediaItem(
                     filename=f'{img_token}_{self.title.data}.jpg',
                     mediatype='image'
@@ -68,6 +69,7 @@ class UploadForm(Form):
                 )
 
                 img.save(f'data/img_orig/{img_token}_{self.file.data.filename}')
+
                 img.save(media_img.local_path)
                 img.thumbnail((200, 200))
                 img.save(media_thumb.local_path)
@@ -93,7 +95,7 @@ def string_to_tags(s: str) -> list:
 async def upload_route():
 
     form = UploadForm()
-    tags = dbsession.query(Tag).filter(Tag.meta == False).all()
+    tags = dbsession.query(Tag).all()
 
     if request.method == 'GET':
         return await render_page('upload.html', form=form, tags=tags)

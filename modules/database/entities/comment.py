@@ -15,8 +15,20 @@ class Comment(Base):
     edit_ts = Column(Integer)
     visibility = Column(Integer)
 
+    parent_post = relationship(
+        'Post',
+        uselist=False
+    )
+
+    parent_reply = relationship(
+        'Comment',
+        remote_side=[id],
+        back_populates='replies'
+    )
+
     replies = relationship(
-        'Comment'
+        'Comment',
+        back_populates='parent_reply'
     )
 
     uploader = relationship(

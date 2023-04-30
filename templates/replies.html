@@ -1,12 +1,14 @@
 
 {% macro render_reply( reply ) %}
-	<div>
-		{% if reply.post_id %}
-			<p>#{{ reply.id }}
-			{{ reply.uploader.profile_name }} comments:</p>
-		{% else %}
-			{{ reply.uploader.profile_name }} replies to #{{ reply.parent_id }}:</p>
-		{% endif %}
+	<div {% if reply.parent_id %} class="indent"{% endif %}>
+		<p>#{{ reply.id }}
+			{% if reply.post_id %}
+				{{ reply.uploader.profile_name }} comments:
+			{% else %}
+				{{ reply.uploader.profile_name }} replies to #{{ reply.parent_id }}:
+			{% endif %}
+			<button class="btn btn-main" onclick="setText('parent_id', '{{ reply.id }}')">Reply</button>
+		</p>
 		<p>{{ reply.content }}</p>
 		{% for reply in reply.replies %}
 			{{ render_reply( reply ) }}
@@ -16,7 +18,7 @@
 
 {% macro render_replies() %}
 
-	{% for reply in post.replies %}
+	{% for reply in replies %}
 			{{ render_reply(reply) }}
 	{% endfor %}
 

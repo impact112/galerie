@@ -1,0 +1,63 @@
+[account]
+    #id {label:"INTEGER PK"}
+    auth_digest {label:"VARCHAR(256)"}
+    description {label:"TEXT"}
+    power_level {label:"INTEGER"}
+    profile_name {label:"VARCHAR(128)"}
+    registration_ts {label:"INTEGER"}
+    username {label:"VARCHAR(64)"}
+
+[comment]
+    *id {label:"INTEGER PK"}
+    content {label:"TEXT"}
+    edit_ts {label:"INTEGER"}
+    parent_id {label:"INTEGER FK"}
+    post_id {label:"INTEGER FK"}
+    upload_ts {label:"INTEGER"}
+    uploader_id {label:"INTEGER FK"}
+    visibility {label:"INTEGER"}
+
+[post]
+    *id {label:"INTEGER PK"}
+    description {label:"TEXT"}
+    edit_ts {label:"INTEGER"}
+    parent_id {label:"INTEGER FK"}
+    title {label:"VARCHAR(256)"}
+    upload_ts {label:"INTEGER"}
+    uploader_id {label:"INTEGER FK"}
+    views {label:"INTEGER"}
+    visibility {label:"INTEGER"}
+
+[mediaitem]
+    *id {label:"INTEGER PK"}
+    filename {label:"VARCHAR(256)"}
+    mediatype {label:"VARCHAR(64)"}
+    parent_account_id {label:"INTEGER FK"}
+    parent_post_id {label:"INTEGER FK"}
+
+[session_token]
+    *id {label:"INTEGER PK"}
+    account_id {label:"INTEGER FK"}
+    max_age {label:"INTEGER"}
+    token {label:"VARCHAR(64)"}
+
+[tag_relationship]
+    *post_id {label:"VARCHAR PK FK"}
+    *tag_id {label:"VARCHAR PK FK"}
+
+[tag]
+    *id {label:"INTEGER PK"}
+    description {label:"TEXT"}
+    meta {label:"BOOLEAN"}
+    name {label:"VARCHAR(256)"}
+
+account 1--* comment 
+post 1--* comment 
+comment 1--* comment 
+post 1--* post 
+account 1--* post 
+account 1--* mediaitem 
+post 1--+ mediaitem 
+account 1--* session_token 
+post 1--+ tag_relationship 
+tag 1--+ tag_relationship 

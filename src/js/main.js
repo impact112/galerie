@@ -84,3 +84,8 @@ function addText(fieldId, fieldText) {
   var inputField = document.getElementById(fieldId);
   inputField.value += fieldText + " ";
 }
+
+function setText(fieldId, fieldText) {
+  var inputField = document.getElementById(fieldId);
+  inputField.value = fieldText;
+}

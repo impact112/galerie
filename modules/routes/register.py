@@ -69,7 +69,7 @@ class RegisterForm(Form):
 async def register_route():
 
     if g.current_account:
-        return 'Already logged in'
+        return redirect(url_for('index_route'))
 
     form = RegisterForm()
 

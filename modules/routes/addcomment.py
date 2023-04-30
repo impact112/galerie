@@ -28,22 +28,24 @@ async def addcomment_route(post_id: int):
     post = dbsession.query(Post).filter(Post.id == post_id).first()
 
     if await form.load(request):
-
+        for f in form.fields:
+            print(f.data)
         parent_comment = dbsession.query(Comment).filter(Comment.id == form.parent_id.data).first()
 
         comment = Comment(
             content=form.text_body.data
         )
 
-        dbsession.add(comment)
-
         if parent_comment:
+            if parent_comment.post_id != post_id:
+                return jsonify({'errors': {'parent_id': "Comment doesnt exist."}}), 400
             parent_comment.replies.append(comment)
-        else:
-            post.replies.append(comment)
+
+        post.replies.append(comment)
 
         comment.uploader = g.current_account
 
+        dbsession.add(comment)
         dbsession.commit()
         dbsession.refresh(comment)
 

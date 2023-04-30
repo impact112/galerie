@@ -4,19 +4,16 @@
 {% block content %}
 
 <h1>{{ account.profile_name }}</h1>
-<h2>@{{ account.username }}</h2>
+<h3>@{{ account.username }}
+	{% if current_account.id == account.id %}
+		<button class="btn btn-main clickable"><a href="/editprofile">Edit profile</a></button>
+		<button class="btn btn-warn clickable"><a href="/logout">Logout</a></button>
+	{% endif %}
+</h3>
 
 <div class="grid-view">
 	{% for post in account.posts %}
-		<div>
-			<a href="{{ url_for( 'post_route', post_id = post.id ) }}">{{ post.title }}
-				{% for mediaitem in post.mediaitems %}
-					{% if mediaitem.mediatype == 'thumb' %}
-						<img style="width: 100%" class="mx-auto d-block" src="{{ mediaitem.server_path }}">
-					{% endif %}
-				{% endfor %}
-			</a>
-		</div>
+		{{ render_card(post) }}
 	{% endfor %}
 </div>
 

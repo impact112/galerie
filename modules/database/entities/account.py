@@ -25,3 +25,7 @@ class Account(Base):
     session_tokens = relationship(
         'SessionToken'
     )
+
+    avatars = relationship(
+        'MediaItem'
+    )

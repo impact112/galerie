@@ -20,7 +20,8 @@ class Post(Base):
     parent_post = relationship(
         'Post',
         remote_side=[id],
-        back_populates='child_posts'
+        back_populates='child_posts',
+        uselist=False
     )
 
     child_posts = relationship(
